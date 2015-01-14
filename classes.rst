@@ -85,3 +85,22 @@ example, to read the ``flags`` private property, you can do::
 
 	String regex = v.o_get(s_MongoDriverBsonRegex_pattern, false, s_MongoDriverBsonRegex_className);
 
+Getting a ClassName
+-------------------
+
+To retrieve the class name of an ``HPHP::Object`` you can call the
+``getClassName`` method. This is a convenience method that actually does
+``.get->getClassName`` — i.e., it goes through ``ObjectData`` first.
+
+As an example::
+
+	static Object HHVM_METHOD( MongoDBManager, executeInsert,
+		const String &ns, const Variant &document, const Object &v)
+	{
+		std::cout << v->getClassName().c_str() << " object converted to ";
+	}
+
+However, instead of using a class name directly to compare with, it is likely
+better to use ``instanceof``.
+
+
