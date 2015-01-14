@@ -1,5 +1,5 @@
-Instantiating a Class and Setting Properties
-============================================
+Classes and Properties
+======================
 
 Instantiating Classes
 ---------------------
@@ -61,3 +61,27 @@ that the property is defined on. As an example::
 
 If setting a protected property, the context should either be the name of the
 class on which the property is defined, or an inherited class.
+
+Getting Properties
+------------------
+
+Properties can be read with the ``o_get`` method called on a ``ObjectData``
+object. It accepts one required argument (name), and two optional ones (throw
+error, and the context).
+
+The name is passed as a ``String``, and when you have a public property, you
+can read it with::
+
+	obj->o_get(String("pattern"));
+
+In order to read a *private* or *protected* property, you need to provide a
+context, which is a ``String`` argument. Because this is the third argument,
+you also have to provide the second one (which defaults to ``true``). As an
+example, to read the ``flags`` private property, you can do::
+
+
+	const StaticString s_MongoDriverBsonRegex_className("MongoDB\\BSON\\Regex");
+	const StaticString s_MongoDriverBsonRegex_pattern("pattern");
+
+	String regex = v.o_get(s_MongoDriverBsonRegex_pattern, false, s_MongoDriverBsonRegex_className);
+
