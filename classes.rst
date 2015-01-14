@@ -94,7 +94,7 @@ To retrieve the class name of an ``HPHP::Object`` you can call the
 
 As an example::
 
-	static Object HHVM_METHOD( MongoDBManager, executeInsert,
+	static Object HHVM_METHOD(MongoDBManager, executeInsert,
 		const String &ns, const Variant &document, const Object &v)
 	{
 		std::cout << v->getClassName().c_str() << " object converted to ";
@@ -103,4 +103,28 @@ As an example::
 However, instead of using a class name directly to compare with, it is likely
 better to use ``instanceof``.
 
+Comparing Classes (instanceof)
+------------------------------
+
+To check whether an object is of a specific class (or an inherited class), you
+can use the ``instanceof`` method on ``HPHP::Object``. A simple equality test
+looks like::
+
+	const StaticString s_MongoDriverBsonRegex_className("MongoDB\\BSON\\Regex");
+
+	if (v.instanceof(s_MongoDriverBsonRegex_className)) {
+	}
+
+This also works for interface implementations. If you consider the ``Regex``
+class to implement ``Type``, then this will also match for the same objects as
+in the above example::
+
+	const StaticString s_MongoDriverBsonType_className("MongoDB\\BSON\\Type");
+
+	void VariantToBsonConverter::convertPart(Object v)
+	{
+		if (v.instanceof(s_MongoDriverBsonType_className)) {
+			// the class of object v implements "Type"
+		}
+	}
 
