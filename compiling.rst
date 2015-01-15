@@ -57,7 +57,7 @@ Verbose Builds
 In order to see what ``make`` actually runs, you can invoke it with verbosity
 turned on::
 
-	make VERBOSE=1
+	make -j5 VERBOSE=1
 
 This then shows the full command to compile each file, and is useful for
 figuring out if things go wrong, and whether specific compiler flags are set.
