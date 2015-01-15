@@ -27,3 +27,23 @@ With ccache enabled, a ``make clean && make -j5`` now takes about 90 seconds,
 instead of nearly an hour.
 
 .. _ccache: https://ccache.samba.org/
+
+Debug Builds
+------------
+
+In order to make a debug build, you need to pass yet another flag to
+``cmake``::
+
+	cmake \
+		-DCMAKE_BUILD_TYPE=Debug \
+		.
+
+This new flag can be combined with the flags from the ccache section to create
+a debug build of HHVM. This sets the ``-Og`` flag instead of ``-O3`` among
+other things.
+
+Sadly, this still does not create easy to debug builds - especially when you
+are making an HHVM extension. I had to modify the
+``CMakeFiles/mongodb.dir/flags.make`` file **after** running ``hphpize``. I
+changed the ``-Og`` to ``-O0 -ggdb3``. After compilation, I now have a debug
+build that works well with ``valgrind`` and ``gdb``.
