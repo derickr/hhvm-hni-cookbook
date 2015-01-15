@@ -128,3 +128,40 @@ in the above example::
 		}
 	}
 
+Defining Class Constants
+------------------------
+
+You can define class constants directly in the ``ext_*.php`` files, for
+example as::
+
+	class Query {
+		const FLAG_NONE = 1;
+	}
+
+But when the value of the constant is defined in a library that you are
+wrapping, you need to do a little bit more work.
+
+In the ``moduleInit()`` of your extension (in the ``*.cpp`` file), you can use
+``Native::registerClassConstant`` to register these constants. As an example,
+you can do::
+
+	const StaticString s_MongoDriverQuery_className("MongoDB\\Driver\\Query");
+
+	…
+
+	virtual void moduleInit() {
+		…
+		Native::registerClassConstant<KindOfInt64>(
+			s_MongoDriverQuery_className.get(),
+			makeStaticString("FLAG_NONE"), 
+			(int64_t) MONGOC_QUERY_NONE
+		);
+		…
+
+The type that you are registering with is defined in the angle brackets
+``<…>``, in most cases, it's the PHP type with ``KindOf`` in front of it. In
+this example, we are registering the class constant
+``MongoDB\Driver\Query::FLAG_NONE`` with the value in ``MONGOC_QUERY_NONE``.
+This (C-level) constant is defined in the libmongoc_ library.
+
+.. _libmongoc: https://github.com/mongodb/mongo-c-driver
