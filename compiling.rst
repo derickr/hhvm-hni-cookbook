@@ -48,6 +48,9 @@ are making an HHVM extension. I had to modify the
 changed the ``-Og`` to ``-O0 -ggdb3``. After compilation, I now have a debug
 build that works well with ``valgrind`` and ``gdb``.
 
+Please note, that you have to do this every single time after you have run
+``hphpize``.
+
 Verbose Builds
 --------------
 
