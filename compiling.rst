@@ -47,3 +47,14 @@ are making an HHVM extension. I had to modify the
 ``CMakeFiles/mongodb.dir/flags.make`` file **after** running ``hphpize``. I
 changed the ``-Og`` to ``-O0 -ggdb3``. After compilation, I now have a debug
 build that works well with ``valgrind`` and ``gdb``.
+
+Verbose Builds
+--------------
+
+In order to see what ``make`` actually runs, you can invoke it with verbosity
+turned on::
+
+	make VERBOSE=1
+
+This then shows the full command to compile each file, and is useful for
+figuring out if things go wrong, and whether specific compiler flags are set.
