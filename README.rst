@@ -16,7 +16,7 @@ This cookbook is released under a `CC0 1.0 Universal`_ license.
 Contents
 --------
 
- - `Instantiating Classes`_
+ - `Classes`_
  - `Adding Resources to Classes`_
  - `Dealing with Exceptions`_
  - `Compiling and Debugging`_
