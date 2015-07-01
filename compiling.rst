@@ -77,3 +77,32 @@ turned on::
 
 This then shows the full command to compile each file, and is useful for
 figuring out if things go wrong, and whether specific compiler flags are set.
+
+HHVM make errors
+----------------
+
+Once in a while, ocaml gets confused about compiled files -- for example when
+a file is renamed. The error looks like something like::
+
+	[ 46%] Built target hphp_analysis
+	Finished, 14 targets (14 cached) in 00:00:00.
+	+ /usr/bin/ocamlc.opt -c -g -w A -warn-error A -w -27 -w -4-6-29-35-44-48 -I server -I dfind -I utils -I format -I stubs -I socket -I procs -I parsing -I hhi -I h2tp -I typing -I fsnotify_linux -I naming -I search -I client -I globals -I deps -I heap -I h2tp/test -I h2tp/unparser -I h2tp/mapper -I h2tp/common -I third-party/inotify -I third-party/avl -I third-party/core -o server/serverConfig.cmi server/serverConfig.mli
+	File "server/serverConfig.mli", line 1:
+	Error: The files utils/relative_path.cmi and utils/typecheckerOptions.cmi
+		   make inconsistent assumptions over interface Utils
+	Command exited with code 2.
+	Compilation unsuccessful after building 84 targets (83 cached) in 00:00:00.
+	Makefile:118: recipe for target '_build/hh_server.native' failed
+	make[3]: *** [_build/hh_server.native] Error 10
+	hphp/hack/CMakeFiles/hack.dir/build.make:49: recipe for target 'hphp/hack/CMakeFiles/hack' failed
+	make[2]: *** [hphp/hack/CMakeFiles/hack] Error 2
+	CMakeFiles/Makefile2:1226: recipe for target 'hphp/hack/CMakeFiles/hack.dir/all' failed
+	make[1]: *** [hphp/hack/CMakeFiles/hack.dir/all] Error 2
+	Makefile:116: recipe for target 'all' failed
+	make: *** [all] Error 2
+
+You can fix this, by running::
+
+	git clean -fdx hphp/hack/
+
+And rebuild.
