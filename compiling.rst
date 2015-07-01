@@ -28,8 +28,8 @@ instead of nearly an hour.
 
 .. _ccache: https://ccache.samba.org/
 
-Debug Builds
-------------
+Debug Builds of HHVM
+--------------------
 
 In order to make a debug build, you need to pass yet another flag to
 ``cmake``::
@@ -42,6 +42,9 @@ This new flag can be combined with the flags from the ccache section to create
 a debug build of HHVM. This sets the ``-Og`` flag instead of ``-O3`` among
 other things.
 
+Debug Builds of HHVM extensions
+-------------------------------
+
 Sadly, this still does not create easy to debug builds - especially when you
 are making an HHVM extension. I had to modify the
 ``CMakeFiles/mongodb.dir/flags.make`` file **after** running ``hphpize``. I
@@ -50,6 +53,19 @@ build that works well with ``valgrind`` and ``gdb``.
 
 Please note, that you have to do this every single time after you have run
 ``hphpize``.
+
+An alternative, is to modify the installed
+``/usr/local/lib/hhvm/CMake/HPHPCompiler.cmake`` and (in vim) run::
+
+	:%s/"-Og -g"/""
+
+When this is done, you can run cmake in the extension's directory (after
+``hphpize``)::
+
+	cmake \
+		-DCMAKE_C_FLAGS="-O0 -ggdb3" \
+		-DCMAKE_CXX_FLAGS="-O0 -ggdb3" \
+		.
 
 Verbose Builds
 --------------
