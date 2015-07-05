@@ -165,3 +165,53 @@ this example, we are registering the class constant
 This (C-level) constant is defined in the libmongoc_ library.
 
 .. _libmongoc: https://github.com/mongodb/mongo-c-driver
+
+Calling Methods
+---------------
+
+In order to call a method, you first need to obtain the HHVM equivalent to a
+zend_class_entry::
+
+	Object v;
+	Class *cls;
+	
+	cls = v.get()->getVMClass();
+
+On this class object you then run ``lookupMethod`` to obtain a handle to the
+function/method::
+
+	Func *m;
+	const StaticString s_MongoDriverBsonSerializable_functionName("bsonSerialize");
+
+	m = cls->lookupMethod(s_MongoDriverBsonSerializable_functionName.get());
+
+Arguments are defined in an array of ``TypedValue`` variables::
+
+	TypedValue args[1] = {
+		*(Variant(v)).asCell()
+	};
+
+In my example, I convert my ``v`` Object to a Variant:: ``Variant(v)`` and on
+this Variant I call ``asCell()`` to create a TypedValue. The pointer to this
+TypedValue is then placed in the ``args`` array.
+
+The obtained method handle can be executed by calling ``invokeFuncFew`` on the
+global context ``g_context``. You need to include the ``execution-context.h``
+header for that::
+
+	#include "hphp/runtime/base/execution-context.h"
+
+With this global context, you then call the function::
+
+	Variant result;
+
+	g_context->invokeFuncFew(
+		result.asTypedValue(), // the by-ref result
+		m,                     // the method handle
+		v.get(),               // the object data, providing context
+		nullptr,               // a null pointer (should only be non-NULL)
+		                       // when calling __call or __callStatic
+		1, args                // the number of arguments, and the arguments in
+		                       // an array
+	);
+
