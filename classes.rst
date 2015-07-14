@@ -215,3 +215,34 @@ With this global context, you then call the function::
 		                       // an array
 	);
 
+
+Obtaining Object Properties as Array
+------------------------------------
+
+In the simplest form, you can get all the properties of an object as an Array
+by just calling ``toArray()`` on the object::
+
+	Array properties;
+	Object v;
+
+	properties = result.toArray();
+
+However, this also includes private and protected properties. If you do not
+want to include those in the resulting array, you need to iterate over the
+properties in a specific context.
+
+The iteration and conversion to Array can be done with the ``o_toIterArray()``
+method on an ``Object``. This method accepts two arguments. The first one is
+the context—the class name as a string. The second one a set of options
+enumerated by ``IterMode``: ``EraseRefs``, ``CreateRefs`` or ``PreserveRefs``.
+
+In the following example, we are using ``null_string`` as the class context.
+That means that we will never get ``protected`` or ``private`` properties in
+the resulting array. We are also just preserving references::
+
+	Array document;
+	Object v;
+
+	document = v->o_toIterArray(null_string, ObjectData::PreserveRefs);
+
+
