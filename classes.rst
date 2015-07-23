@@ -5,7 +5,7 @@ Instantiating Classes
 ---------------------
 
 If you need to instantiate a class, you can do that through
-``ObjectData::newInstance()``. It wants a ``Class*`` as argument, which you can
+``Object{}``. It wants a ``Class*`` as argument, which you can
 obtain by calling ``Unit::lookupClass()``.
 
 In full, you'd have to do something like::
@@ -19,9 +19,9 @@ In full, you'd have to do something like::
 		...
 
 		c_foobar = Unit::lookupClass(s_MongoDriverWriteResult_className.get());
-		ObjectData* obj = ObjectData::newInstance(c_foobar);
+		Object obj = Object{c_foobar};
 
-		return Object(obj);
+		return obj;
 	}
 
 This works for both Natively implemented as well as PHP/Hack defined classes.
