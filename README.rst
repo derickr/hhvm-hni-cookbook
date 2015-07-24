@@ -19,9 +19,11 @@ Contents
  - `Classes`_
  - `Adding Resources to Classes`_
  - `Dealing with Exceptions`_
- - `Compiling and Debugging`_
+ - `Compiling and Setting up for Debugging`_
+ - `Debugging`_
 
 .. _`Classes`: classes.rst
 .. _`Adding Resources to Classes`: add-class-storage.rst
 .. _`Dealing with Exceptions`: exceptions.rst
-.. _`Compiling and Debugging`: compiling.rst
+.. _`Compiling and Setting up for Debugging`: compiling.rst
+.. _`Debugging`: debugging.rst
