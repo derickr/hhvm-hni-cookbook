@@ -245,4 +245,17 @@ the resulting array. We are also just preserving references::
 
 	document = v->o_toIterArray(null_string, ObjectData::PreserveRefs);
 
+Checking whether a Class is of a Certain Type
+---------------------------------------------
 
+If you want to find out whether a ``Class`` is a normal class, or something
+else, there are a few methods that you can call on a ``Class*`` to find out.
+For example, to find out if a class is a "concrete class", and not an
+interface, trait, or an enum), you can use::
+
+	Class *cls;
+
+	isNormalClass(cls);
+
+There is also ``isTrait()``, ``isEnum()``, ``isInterface()`` and
+``isAbstract()``.
