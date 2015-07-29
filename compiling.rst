@@ -41,6 +41,15 @@ This new flag can be combined with the flags from the ccache section to create
 a debug build of HHVM. This sets the ``-Og`` flag instead of ``-O3`` among
 other things.
 
+Install Prefix
+--------------
+
+You can set an install prefix by running cmake with a flag to ``cmake`` too::
+
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/media/derick/OSM-Media/hhvm-3.8 \
+		.
+
 Debug Builds of HHVM extensions
 -------------------------------
 
