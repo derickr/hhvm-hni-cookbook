@@ -35,3 +35,20 @@ sense to add the following define to your main header file::
 And then you can check for versions with::
 
 	#if HIPPO_HHVM_VERSION >= 30900
+
+Changes between HHVM 3.8 and HHVM 3.9
+-------------------------------------
+
+makeSmartPtr
+~~~~~~~~~~~~
+
+``makeSmartPtr`` has gone away. Instead you now need to use ``req::make``. The
+following allows you to make your extension work with both variants::
+
+	req::ptr<DateTime> m_dt;
+
+	#if HIPPO_HHVM_VERSION >= 30900
+		m_dt = req::make<DateTime>(0, false);
+	#else
+		m_dt = makeSmartPtr<DateTime>(0, false);
+	#endif
