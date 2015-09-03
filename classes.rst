@@ -259,3 +259,9 @@ interface, trait, or an enum), you can use::
 
 There is also ``isTrait()``, ``isEnum()``, ``isInterface()`` and
 ``isAbstract()``.
+
+Please note that ``isNormalClass()`` also allows for abstract classes, so if
+you want to check whether a class is a real concrete class, you will need to
+check this with::
+
+	if (isNormalClass(cls) && !isAbstract(cls)) {
