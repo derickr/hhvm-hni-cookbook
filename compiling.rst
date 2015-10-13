@@ -126,3 +126,19 @@ You can fix this, by running::
 	git clean -fdx hphp/hack/
 
 And rebuild.
+
+HHVM and GCC 5
+--------------
+
+These don't work well together yet, instead, you need to compile with::
+
+	cmake \
+		-DCMAKE_BUILD_TYPE=Debug \
+		-DCMAKE_CXX_COMPILER=`which g++-4.9` \
+		-DCMAKE_C_COMPILER=`which gcc-4.9` \
+		-DCMAKE_ASM_COMPILER=`which gcc-4.9` \
+		.
+
+This is not all though, you also need special versions of Boost and Google
+Log, if you're using a really new set of Debian packages. There is extra
+information at http://derickrethans.nl/hhvm-gcc-52.html
