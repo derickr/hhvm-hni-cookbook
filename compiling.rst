@@ -50,6 +50,17 @@ You can set an install prefix by running cmake with a flag to ``cmake`` too::
 		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.9 \
 		.
 
+Default php.ini File Location
+-----------------------------
+
+Since HHVM 3.10, you can specify the default location for the ``php.ini``
+file. This is handy if you build/run more than one version of HHVM. The flag
+is::
+
+	cmake \
+		-DDEFAULT_CONFIG_DIR=/etc/hhvm/3.10 \
+		.
+
 Full Build
 ----------
 
