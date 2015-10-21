@@ -47,7 +47,7 @@ Install Prefix
 You can set an install prefix by running cmake with a flag to ``cmake`` too::
 
 	cmake \
-		-DCMAKE_INSTALL_PREFIX=/media/derick/OSM-Media/hhvm-3.8 \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.9 \
 		.
 
 Full Build
@@ -56,7 +56,7 @@ Full Build
 With all the flags, the ``cmake`` incantation is::
 
 	cmake \
-		-DCMAKE_INSTALL_PREFIX=/media/derick/OSM-Media/hhvm-3.8 \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.9 \
 		-DCMAKE_CXX_COMPILER="/usr/lib/ccache/g++" \
 		-DCMAKE_C_COMPILER="/usr/lib/ccache/gcc" \
 		-DCMAKE_BUILD_TYPE=Debug \
@@ -137,6 +137,7 @@ These don't work well together yet, instead, you need to compile with::
 		-DCMAKE_CXX_COMPILER=`which g++-4.9` \
 		-DCMAKE_C_COMPILER=`which gcc-4.9` \
 		-DCMAKE_ASM_COMPILER=`which gcc-4.9` \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.10.0 \
 		.
 
 This is not all though, you also need special versions of Boost and Google
