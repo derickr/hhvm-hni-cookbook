@@ -10,6 +10,18 @@ In GDB, you can print the value of a String object with::
 
 	p *named_class.m_str.m_px
 
+	p ((StringData*) 0x7fffe3c06000).m_data
+
+Value of Array objects
+----------------------
+
+::
+
+	p *v.m_data.parr
+
+	p ((MixedArray::Elm*)((MixedArray*)&$10 + 1))[0]@2
+
+
 GDB utilities
 -------------
 
