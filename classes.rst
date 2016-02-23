@@ -24,12 +24,20 @@ In full, you'd have to do something like::
 		return obj;
 	}
 
-This works for both Natively implemented as well as PHP/Hack defined classes.
-
 This snippet also returns the newly instantiated object. Make sure you get the
 name of the class right, and that you don't get a NULL pointer back from
-`lookupClass`, or otherwise you get weird errors back. In my case, a "can not
-convert array to string" warning.
+``lookupClass``, or otherwise you get weird errors back. In my case, a "can
+not convert array to string" warning.
+
+Autoloading Classes
+~~~~~~~~~~~~~~~~~~~
+
+``lookupClass`` works for both Natively implemented classes, as well as
+PHP/Hack defined classes. However, it will *not* trigger autoloading of
+classes. For that, you need to use ``Unit::getClass( …, true );`` instead. For
+example::
+
+	c_class = Unit::getClass(named_class.get(), true);
 
 Setting Properties
 ------------------
