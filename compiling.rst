@@ -47,7 +47,7 @@ Install Prefix
 You can set an install prefix by running cmake with a flag to ``cmake`` too::
 
 	cmake \
-		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.9 \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.12 \
 		.
 
 Default php.ini File Location
@@ -58,7 +58,7 @@ file. This is handy if you build/run more than one version of HHVM. The flag
 is::
 
 	cmake \
-		-DDEFAULT_CONFIG_DIR=/etc/hhvm/3.10 \
+		-DDEFAULT_CONFIG_DIR=/etc/hhvm/3.12 \
 		.
 
 Full Build
@@ -67,7 +67,7 @@ Full Build
 With all the flags, the ``cmake`` incantation is::
 
 	cmake \
-		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.9 \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.12 \
 		-DCMAKE_CXX_COMPILER="/usr/lib/ccache/g++" \
 		-DCMAKE_C_COMPILER="/usr/lib/ccache/gcc" \
 		-DCMAKE_BUILD_TYPE=Debug \
@@ -144,11 +144,12 @@ HHVM and GCC 5
 These don't work well together yet, instead, you need to compile with::
 
 	cmake \
+		-DDEFAULT_CONFIG_DIR=/etc/hhvm/3.12 \
 		-DCMAKE_BUILD_TYPE=Debug \
 		-DCMAKE_CXX_COMPILER=`which g++-4.9` \
 		-DCMAKE_C_COMPILER=`which gcc-4.9` \
 		-DCMAKE_ASM_COMPILER=`which gcc-4.9` \
-		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.10.0 \
+		-DCMAKE_INSTALL_PREFIX=/usr/local/hhvm/3.12.0 \
 		.
 
 This is not all though, you also need special versions of Boost and Google
