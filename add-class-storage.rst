@@ -70,4 +70,8 @@ In the class definition (in ``ext_mongodb.php``) you would also need the
 	class Manager {
 		<<__Native>>
 		function __construct(string $dsn = "localhost", array $options = array(), array $driverOptions = array()): void;
-	}   
+	}
+
+**Warning:** If you forget the ``<<__NativeData("MongoDBManager")>>``
+annotation for the class, you are going to be in for a long frustrating ride
+figuring out why data is suddenly changing.
